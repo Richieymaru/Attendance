@@ -5,13 +5,16 @@ import { NameAtt } from "./NameAtt";
 
 function App() {
 
+  //useState of Table and Setting name
   const [tableName, setTableName] = useState([]);
   const [name, setName] = useState("");
 
+  //getting the current date and time
   const currentDateTime = new Date();
   let curDate = `${currentDateTime.getDate()}/${currentDateTime.getMonth()+1}/${currentDateTime.getFullYear()}`;
   let curTime = currentDateTime.getHours() + ':' + currentDateTime.getMinutes() + ':' + currentDateTime.getSeconds();
 
+  //getting the id, tablename, date and time, to become an array
   const handleSubmitForm = () => {
     const submitForm = {
       id: tableName.length === 0 ? 1 : tableName[tableName.length - 1].id + 1,
@@ -22,6 +25,7 @@ function App() {
     setTableName([...tableName, submitForm]);
   };
 
+  //connected to the select option of the NEUST OJT NAME
   const onChange = (event) => {
     const value = event.target.value;
     setName(value);
@@ -29,7 +33,8 @@ function App() {
 
   return(
     <div className="App">
-        <label>Enter OJT Name: <br/>
+        {/* select option in the name of NEUST OJT */}
+        <label>Enter OJT Name:
           <select onChange={onChange}>
             <option selected defaultValue disabled>NEUST OJT NAME</option>
             <option value="Rinand">Rinand</option>
@@ -38,16 +43,20 @@ function App() {
             <option value="Daniel">Daniel</option>
             <option value="Jhonas">Jhonas</option>
           </select>
-        </label><br/><br/>
+        </label>
+        {/* show the current date */}
         <label>Date<br/>
           <input type="text" value={curDate} readOnly/>
-        </label><br/><br/>
-        <label>Time<br/>
+        </label>
+        {/* show the current time */}
+        <label>Time
           <input type="text" value={curTime} readOnly/>
-        </label><br/><br/>
+        </label><br/>
+        {/* button to submit the data */}
         <button onClick={handleSubmitForm}>Submit Attendance</button>
       <br/>
       <div className="container">
+        {/* table of the data */}
         <table>
             <thead>
                 <tr>
@@ -64,9 +73,6 @@ function App() {
             </tbody>
         </table>
       </div>
-
-
-
     </div>
   );
 };
